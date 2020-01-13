@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ProgramsPageTemplate } from "../../templates/Programs-page";
+import { ProgramsPageTemplate } from "../../templates/programs-page";
 
 const ProgramsPagePreview = ({ entry, widgetFor }) => (
   <ProgramsPageTemplate
