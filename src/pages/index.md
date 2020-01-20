@@ -5,15 +5,15 @@ image: /img/img_8685.jpg
 heading: Great coffee with a conscience
 subheading: Enriching the lives of Roseburg youth
 mainpitch:
-  title: Mission Statement
+  title: Mission
   description: >
-    To inspire all young people, especially those who need us most, 
-    to reach their full potential as productive, caring, and responsible 
-    citizens. The Boys & Girls Club of the Umpqua Valley is a non-profit 
-    organization serving more than 1500 local youth entering 1st grade 
-    through 12th grade annually. Since 2001, our programs have delivered 
-    outcome-driven experiences that enrich kids’ lives by impacting 
-    academic success, good character and citizenship, and healthy lifestyles.
+    To inspire all young people, especially those who need us most,  to reach
+    their full potential as productive, caring, and responsible  citizens. The
+    Boys & Girls Club of the Umpqua Valley is a non-profit  organization serving
+    more than 1500 local youth entering 1st grade  through 12th grade annually.
+    Since 2001, our programs have delivered  outcome-driven experiences that
+    enrich kids’ lives by impacting  academic success, good character and
+    citizenship, and healthy lifestyles.
 description: >-
   Kaldi is the ultimate spot for coffee lovers who want to learn about their
   java’s origin and support the farmers that grew it. We take coffee production,
@@ -71,3 +71,4 @@ main:
     alt: Coffee beans
     image: /img/products-grid1.jpg
 ---
+
