@@ -5,6 +5,7 @@ import { Link, graphql } from "gatsby";
 import Layout from "../components/Layout";
 import Features from "../components/Features";
 import BlogRoll from "../components/BlogRoll";
+import NewsRoll from "../components/NewsRoll";
 
 export const IndexPageTemplate = ({
   image,
@@ -97,6 +98,10 @@ export const IndexPageTemplate = ({
                     Latest stories
                   </h3>
                   <BlogRoll />
+                  <h3 className="has-text-weight-semibold is-size-2">Events</h3>
+                  <NewsRoll tag={"events"} />
+                  <h3 className="has-text-weight-semibold is-size-2">Sports</h3>
+                  <NewsRoll tag={"sports"} />
                   <div className="column is-12 has-text-centered">
                     <Link className="btn" to="/blog">
                       Read more
@@ -126,7 +131,6 @@ IndexPageTemplate.propTypes = {
 
 const IndexPage = ({ data }) => {
   const { frontmatter } = data.markdownRemark;
-  console.log(frontmatter);
 
   return (
     <Layout>

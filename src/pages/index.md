@@ -5,7 +5,7 @@ image: /img/img_8685.jpg
 heading: Great coffee with a conscience
 subheading: Enriching the lives of Roseburg youth
 mainpitch:
-  title: Mission Statement
+  title: Mission
   description: >
     To inspire all young people, especially those who need us most, 
     to reach their full potential as productive, caring, and responsible 
