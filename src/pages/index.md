@@ -1,7 +1,7 @@
 ---
 templateKey: index-page
 title: Boys & Girls Club of the Umpqua Valley
-image: /img/CKMoYandYOY4Web.jpg
+image: /img/img_8685.jpg
 heading: Great coffee with a conscience
 subheading: Enriching the lives of Roseburg youth
 mainpitch:
