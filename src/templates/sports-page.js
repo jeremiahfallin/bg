@@ -23,10 +23,9 @@ export const SportsPageTemplate = ({
     <section className="section">
       {helmet || ""}
       <div className="container content">
-        {console.log(image)}
         <div className="columns">
           <div className="column is-10 is-offset-1">
-            {/* <div
+            <div
               className="full-width-image margin-top-0"
               style={{
                 backgroundImage: `url(${
@@ -62,7 +61,7 @@ export const SportsPageTemplate = ({
                   {title}
                 </h1>
               </div>
-            </div> */}
+            </div>
             <p>{description}</p>
             <PostContent content={content} />
             <NewsRoll tag={"sports"} />
@@ -86,6 +85,7 @@ export const SportsPageTemplate = ({
 };
 
 SportsPageTemplate.propTypes = {
+  image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   content: PropTypes.node.isRequired,
   contentComponent: PropTypes.func,
   description: PropTypes.string,
@@ -111,6 +111,7 @@ const SportsPage = ({ data }) => {
             />
           </Helmet>
         }
+        image={post.frontmatter.image}
         tags={post.frontmatter.tags}
         title={post.frontmatter.title}
       />
