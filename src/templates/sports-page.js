@@ -3,10 +3,13 @@ import PropTypes from "prop-types";
 import { kebabCase } from "lodash";
 import Helmet from "react-helmet";
 import { graphql, Link } from "gatsby";
+
 import Layout from "../components/Layout";
+import NewsRoll from "../components/NewsRoll";
 import Content, { HTMLContent } from "../components/Content";
 
-export const BlogPostTemplate = ({
+export const SportsPageTemplate = ({
+  image,
   content,
   contentComponent,
   description,
@@ -20,13 +23,49 @@ export const BlogPostTemplate = ({
     <section className="section">
       {helmet || ""}
       <div className="container content">
+        {console.log(image)}
         <div className="columns">
           <div className="column is-10 is-offset-1">
-            <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
-              {title}
-            </h1>
+            {/* <div
+              className="full-width-image margin-top-0"
+              style={{
+                backgroundImage: `url(${
+                  !!image.childImageSharp
+                    ? image.childImageSharp.fluid.src
+                    : image
+                })`,
+                backgroundPosition: `top left`,
+                backgroundAttachment: `fixed`
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  height: "150px",
+                  lineHeight: "1",
+                  justifyContent: "space-around",
+                  alignItems: "left",
+                  flexDirection: "column"
+                }}
+              >
+                <h1
+                  className="has-text-weight-bold is-size-3-mobile is-size-2-tablet is-size-1-widescreen"
+                  style={{
+                    boxShadow:
+                      "#0081c6 0.5rem 0px 0px, #0081c6 -0.5rem 0px 0px",
+                    backgroundColor: "#0081c6",
+                    color: "white",
+                    lineHeight: "1",
+                    padding: "0.25em"
+                  }}
+                >
+                  {title}
+                </h1>
+              </div>
+            </div> */}
             <p>{description}</p>
             <PostContent content={content} />
+            <NewsRoll tag={"sports"} />
             {tags && tags.length ? (
               <div style={{ marginTop: `4rem` }}>
                 <h4>Tags</h4>
@@ -46,7 +85,7 @@ export const BlogPostTemplate = ({
   );
 };
 
-BlogPostTemplate.propTypes = {
+SportsPageTemplate.propTypes = {
   content: PropTypes.node.isRequired,
   contentComponent: PropTypes.func,
   description: PropTypes.string,
@@ -54,17 +93,17 @@ BlogPostTemplate.propTypes = {
   helmet: PropTypes.object
 };
 
-const BlogPost = ({ data }) => {
+const SportsPage = ({ data }) => {
   const { markdownRemark: post } = data;
 
   return (
     <Layout>
-      <BlogPostTemplate
+      <SportsPageTemplate
         content={post.html}
         contentComponent={HTMLContent}
         description={post.frontmatter.description}
         helmet={
-          <Helmet titleTemplate="%s | Blog">
+          <Helmet titleTemplate="%s | Sports">
             <title>{`${post.frontmatter.title}`}</title>
             <meta
               name="description"
@@ -79,22 +118,28 @@ const BlogPost = ({ data }) => {
   );
 };
 
-BlogPost.propTypes = {
+SportsPage.propTypes = {
   data: PropTypes.shape({
     markdownRemark: PropTypes.object
   })
 };
 
-export default BlogPost;
+export default SportsPage;
 
 export const pageQuery = graphql`
-  query BlogPostByID($id: String!) {
+  query SportsPageTemplate($id: String!) {
     markdownRemark(id: { eq: $id }) {
       id
       html
       frontmatter {
-        date(formatString: "MMMM DD, YYYY")
         title
+        image {
+          childImageSharp {
+            fluid(maxWidth: 2048, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
         description
         tags
       }

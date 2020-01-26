@@ -9,6 +9,7 @@ import InfoPagePreview from "./preview-templates/InfoPagePreview";
 import InvolvementPagePreview from "./preview-templates/InvolvementPagePreview";
 import ProductPagePreview from "./preview-templates/ProductPagePreview";
 import ProgramsPagePreview from "./preview-templates/ProgramsPagePreview";
+import SportsPagePreview from "./preview-templates/SportsPagePreview";
 
 // CMS.registerMediaLibrary(uploadcare)
 // CMS.registerMediaLibrary(cloudinary)
@@ -20,6 +21,7 @@ CMS.registerPreviewTemplate("info", InfoPagePreview);
 CMS.registerPreviewTemplate("involvement", InvolvementPagePreview);
 CMS.registerPreviewTemplate("products", ProductPagePreview);
 CMS.registerPreviewTemplate("programs", ProgramsPagePreview);
+CMS.registerPreviewTemplate("sports", SportsPagePreview);
 
 // Pages:
 // Index
@@ -28,3 +30,4 @@ CMS.registerPreviewTemplate("programs", ProgramsPagePreview);
 // Club Info
 // Who We are
 // News
+// Sports
