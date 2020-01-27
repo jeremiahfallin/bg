@@ -1,119 +1,127 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { kebabCase } from "lodash";
-import Helmet from "react-helmet";
-import { graphql, Link } from "gatsby";
-
+import { graphql } from "gatsby";
 import Layout from "../components/Layout";
-import NewsRoll from "../components/NewsRoll";
-import Content, { HTMLContent } from "../components/Content";
+import Features from "../components/Features";
+import Testimonials from "../components/Testimonials";
+import Pricing from "../components/Pricing";
 
 export const SportsPageTemplate = ({
   image,
-  content,
-  contentComponent,
-  description,
-  tags,
   title,
-  helmet
-}) => {
-  const PostContent = contentComponent || Content;
-
-  return (
-    <section className="section">
-      {helmet || ""}
-      <div className="container content">
-        <div className="columns">
-          <div className="column is-10 is-offset-1">
-            <div
-              className="full-width-image margin-top-0"
-              style={{
-                backgroundImage: `url(${
-                  !!image.childImageSharp
-                    ? image.childImageSharp.fluid.src
-                    : image
-                })`,
-                backgroundPosition: `top left`,
-                backgroundAttachment: `fixed`
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  height: "150px",
-                  lineHeight: "1",
-                  justifyContent: "space-around",
-                  alignItems: "left",
-                  flexDirection: "column"
-                }}
-              >
-                <h1
-                  className="has-text-weight-bold is-size-3-mobile is-size-2-tablet is-size-1-widescreen"
-                  style={{
-                    boxShadow:
-                      "#0081c6 0.5rem 0px 0px, #0081c6 -0.5rem 0px 0px",
-                    backgroundColor: "#0081c6",
-                    color: "white",
-                    lineHeight: "1",
-                    padding: "0.25em"
-                  }}
-                >
-                  {title}
-                </h1>
-              </div>
+  heading,
+  description,
+  intro,
+  main,
+  testimonials,
+  fullImage,
+  pricing
+}) => (
+  <div className="content">
+    <div
+      className="full-width-image-container margin-top-0"
+      style={{
+        backgroundImage: `url(${
+          !!image.childImageSharp ? image.childImageSharp.fluid.src : image
+        })`
+      }}
+    >
+      <h2
+        className="has-text-weight-bold is-size-1"
+        style={{
+          boxShadow: "0.5rem 0 0 #f40, -0.5rem 0 0 #f40",
+          backgroundColor: "#f40",
+          color: "white",
+          padding: "1rem"
+        }}
+      >
+        {title}
+      </h2>
+    </div>
+    <section className="section section--gradient">
+      <div className="container">
+        <div className="section">
+          <div className="columns">
+            <div className="column is-7 is-offset-1">
+              <h3 className="has-text-weight-semibold is-size-2">{heading}</h3>
+              <p>{description}</p>
             </div>
-            <p>{description}</p>
-            <PostContent content={content} />
-            <NewsRoll tag={"sports"} />
-            {tags && tags.length ? (
-              <div style={{ marginTop: `4rem` }}>
-                <h4>Tags</h4>
-                <ul className="taglist">
-                  {tags.map(tag => (
-                    <li key={tag + `tag`}>
-                      <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
-                    </li>
-                  ))}
-                </ul>
+          </div>
+          <div className="columns">
+            <div className="column is-10 is-offset-1">
+              <Features gridItems={intro.blurbs} />
+              <div className="columns">
+                <div className="column is-7">
+                  <h3 className="has-text-weight-semibold is-size-3">
+                    {main.heading}
+                  </h3>
+                  <p>{main.description}</p>
+                </div>
               </div>
-            ) : null}
+              <Testimonials testimonials={testimonials} />
+              <div
+                className="full-width-image-container"
+                style={{
+                  backgroundImage: `url(${
+                    fullImage.childImageSharp
+                      ? fullImage.childImageSharp.fluid.src
+                      : fullImage
+                  })`
+                }}
+              />
+              <h2 className="has-text-weight-semibold is-size-2">
+                {pricing.heading}
+              </h2>
+              <p className="is-size-5">{pricing.description}</p>
+              <Pricing data={pricing.plans} />
+            </div>
           </div>
         </div>
       </div>
     </section>
-  );
-};
+  </div>
+);
 
 SportsPageTemplate.propTypes = {
   image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  content: PropTypes.node.isRequired,
-  contentComponent: PropTypes.func,
-  description: PropTypes.string,
   title: PropTypes.string,
-  helmet: PropTypes.object
+  heading: PropTypes.string,
+  description: PropTypes.string,
+  intro: PropTypes.shape({
+    blurbs: PropTypes.array
+  }),
+  main: PropTypes.shape({
+    heading: PropTypes.string,
+    description: PropTypes.string,
+    image1: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    image2: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    image3: PropTypes.oneOfType([PropTypes.object, PropTypes.string])
+  }),
+  testimonials: PropTypes.array,
+  fullImage: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  pricing: PropTypes.shape({
+    heading: PropTypes.string,
+    description: PropTypes.string,
+    plans: PropTypes.array
+  })
 };
 
 const SportsPage = ({ data }) => {
-  const { markdownRemark: post } = data;
+  const { frontmatter } = data.markdownRemark;
+  console.log(frontmatter);
 
   return (
     <Layout>
       <SportsPageTemplate
-        content={post.html}
-        contentComponent={HTMLContent}
-        description={post.frontmatter.description}
-        helmet={
-          <Helmet titleTemplate="%s | Sports">
-            <title>{`${post.frontmatter.title}`}</title>
-            <meta
-              name="description"
-              content={`${post.frontmatter.description}`}
-            />
-          </Helmet>
-        }
-        image={post.frontmatter.image}
-        tags={post.frontmatter.tags}
-        title={post.frontmatter.title}
+        image={frontmatter.image}
+        title={frontmatter.title}
+        heading={frontmatter.heading}
+        description={frontmatter.description}
+        intro={frontmatter.intro}
+        main={frontmatter.main}
+        testimonials={frontmatter.testimonials}
+        fullImage={frontmatter.full_image}
+        pricing={frontmatter.pricing}
       />
     </Layout>
   );
@@ -121,17 +129,17 @@ const SportsPage = ({ data }) => {
 
 SportsPage.propTypes = {
   data: PropTypes.shape({
-    markdownRemark: PropTypes.object
+    markdownRemark: PropTypes.shape({
+      frontmatter: PropTypes.object
+    })
   })
 };
 
 export default SportsPage;
 
-export const pageQuery = graphql`
-  query SportsPageTemplate($id: String!) {
+export const sportsPageQuery = graphql`
+  query SportsPage($id: String!) {
     markdownRemark(id: { eq: $id }) {
-      id
-      html
       frontmatter {
         title
         image {
@@ -141,8 +149,40 @@ export const pageQuery = graphql`
             }
           }
         }
+        heading
         description
-        tags
+        intro {
+          blurbs {
+            image {
+              childImageSharp {
+                fluid(maxWidth: 240, quality: 64) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
+            text
+          }
+          heading
+          description
+        }
+        main {
+          heading
+          description
+        }
+        testimonials {
+          author
+          quote
+        }
+        pricing {
+          heading
+          description
+          plans {
+            description
+            items
+            plan
+            price
+          }
+        }
       }
     }
   }
