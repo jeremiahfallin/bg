@@ -6,8 +6,6 @@ image: /img/img_8685.jpg
 heading: Great coffee with a conscience
 ---
 
-![flavor wheel](/img/flavor_wheel.jpg)
-
 # 2020 Basketball Schedule Now Available!
 
 - 2020 Boys 3rd-4th Grade Basketball Schedule
